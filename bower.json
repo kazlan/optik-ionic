@@ -1,0 +1,21 @@
+{
+  "name": "plantilla",
+  "version": "0.0.0",
+  "authors": [
+    "kazlan <jorge.mollon@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ionic": "~1.1.0",
+    "ionicons": "~2.0.1",
+    "ionic-material": "~0.4.2",
+    "angularfire": "~1.1.2"
+  }
+}
