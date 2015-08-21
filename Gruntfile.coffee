@@ -10,15 +10,13 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-copy'
     grunt.loadNpmTasks 'grunt-wiredep'
     grunt.loadNpmTasks 'grunt-newer'
+    grunt.loadNpmTasks 'grunt-usemin'
+    grunt.loadNpmTasks 'grunt-contrib-cssmin'
+    grunt.loadNpmTasks 'grunt-filerev'
 
     grunt.initConfig
         pkg: grunt.file.readJSON 'package.json'
 
-    # DEFINICION DE LAS TAREAS
-        uglify:
-            build:
-                files:
-                    'build/assets/libs.min.js': ['temp/libs.js']
     #- BrowserSync
         browserSync:
             bsFiles:
@@ -49,17 +47,6 @@ module.exports = (grunt) ->
                     ext: '.html'
                     extDot: 'first'
                     ]
-    #- Coffee
-        coffee:
-            devel:
-                files: [
-                    expand: true
-                    cwd: 'src/'
-                    src: ['**/*.coffee']
-                    dest: 'build'
-                    ext: '.js'
-                    extDot: 'first'
-                    ]
     #- Sass
         sass:
             devel:
@@ -72,7 +59,7 @@ module.exports = (grunt) ->
                     extDot: 'first'
                     ]
 
-    # WATCHES
+    #- WATCHES
         watch:
             options:
                 spawn: false
@@ -90,55 +77,41 @@ module.exports = (grunt) ->
                 tasks: ['less']
             js:
                 files: "app/**/*.js"
-                tasks: ['copy:jscript']
+                tasks: ['copy:jscript']           
             bower:
                 files: "bower.json"
                 tasks: ['wiredep']
-                
-    #- Concat js libs
-        concat:
-            options:
-                separator: ';'
-            libs:
-                files:
-                    'temp/libs.js': [
-                        'bower_components/angular/angular.js',
-                        'bower_components/angular-animate/angular-animate.js',
-                        'bower_components/angular-aria/angular-aria.js',
-                        'bower_components/angular-material/angular-material.js',
-                        'bower_components/firebase/firebase.js'
-                        'bower_components/angularfire/dist/angularfire.js',
-                        'bower_components/angular-route/angular-route.js'
-                        ]
-                    'build/assets/libs.css': [
-                        'bower_components/angular-material/angular-material.css'
-                    ]
-    #- Copy bower repo
+   #- USEMIN:: Concat, minify y filerevision de js y css en index.html
         copy:
-            devel:
+            build:
+                src: 'app/index.html'
+                dest: 'build/index.html'
+        filerev:
+            options:
+                encoding: 'utf8'
+                algorithm: 'md5'
+                length: 20
+            source:
                 files: [
-                    expand: true
-                    cwd: 'bower_components/'
-                    src: ['**']
-                    dest: 'build/bower_components/'
+                    src: [
+                        'build/js/*.js',
+                        'build/css/*.css'
+                        ]
                     ]
-            jscript:
-                files: [
-                    expand: true
-                    cwd: 'app/'
-                    src: ['**/*.js']
-                    dest: 'build'
-                ]
-            assets:
-                files: [
-                    expand: true
-                    cwd: 'app/assets/'
-                    src: ['**/*.*']
-                    dest: 'build/assets/'
-                ]
-
+        useminPrepare:
+            html: 'app/index.html'
+            options:
+                dest: 'build'
+        usemin:
+            html: 'build/index.html'
+            options:
+                assetsDirs: ['build','build/css', 'build/js','css','js']
+      
     # Conjuntos de tareas (default para lanzar grunt sin nada más)
     grunt.registerTask 'server', ['default', 'browserSync','watch']
     grunt.registerTask 'assets', ['copy:assets']
-    grunt.registerTask 'default', ['newer:uglify','newer:jade','newer:sass','wiredep']
+    grunt.registerTask 'build',[
+        'copy:build', 'useminPrepare','concat','uglify','cssmin','filerev','usemin'
+    ]
+    grunt.registerTask 'default', ['newer:jade','newer:sass','wiredep']
 
