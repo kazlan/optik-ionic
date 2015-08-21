@@ -4,15 +4,10 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-browser-sync'
     grunt.loadNpmTasks 'grunt-contrib-jade'
-    grunt.loadNpmTasks 'grunt-contrib-coffee'
     grunt.loadNpmTasks 'grunt-contrib-sass'
-    grunt.loadNpmTasks 'grunt-contrib-stylus'
-    grunt.loadNpmTasks 'grunt-contrib-less'
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'grunt-contrib-concat'
-    grunt.loadNpmTasks 'grunt-bower-install'
     grunt.loadNpmTasks 'grunt-contrib-copy'
-    grunt.loadNpmTasks 'grunt-bower-main'
     grunt.loadNpmTasks 'grunt-wiredep'
     grunt.loadNpmTasks 'grunt-newer'
 
@@ -27,15 +22,20 @@ module.exports = (grunt) ->
     #- BrowserSync
         browserSync:
             bsFiles:
-                src: 'build/**/*'
+                src: 'app/**/*'
             options:
                 server:
-                    baseDir: "build/"
+                    baseDir: "app/"
                 ui:
                     port: 8080
                 open: false
                 notify: false
                 watchTask: true
+    #- wiredep
+        wiredep:
+            task:
+                src: ['app/index.html']
+                
     #- Jade
         jade:
             devel:
@@ -45,7 +45,7 @@ module.exports = (grunt) ->
                     expand: true
                     cwd: 'app/'
                     src: ['**/*.jade']
-                    dest: 'build'
+                    dest: 'app'
                     ext: '.html'
                     extDot: 'first'
                     ]
@@ -60,25 +60,14 @@ module.exports = (grunt) ->
                     ext: '.js'
                     extDot: 'first'
                     ]
-                
-    #- Stylus
-        stylus:
-            devel:
-                files:
-                    'build/css/estilos.css': 'src/css/estilos.styl'
-    #- less
-        less:
-            devel:
-                files:
-                    'build/css/estilos.css': 'src/css/estilos.less'
     #- Sass
         sass:
             devel:
                 files: [
                     expand: true
-                    cwd: 'app/sass/'
+                    cwd: 'app/styles/'
                     src: ['*.sass']
-                    dest: 'build/css/'
+                    dest: 'app/styles/'
                     ext: '.css'
                     extDot: 'first'
                     ]
@@ -102,6 +91,9 @@ module.exports = (grunt) ->
             js:
                 files: "app/**/*.js"
                 tasks: ['copy:jscript']
+            bower:
+                files: "bower.json"
+                tasks: ['wiredep']
                 
     #- Concat js libs
         concat:
@@ -148,5 +140,5 @@ module.exports = (grunt) ->
     # Conjuntos de tareas (default para lanzar grunt sin nada más)
     grunt.registerTask 'server', ['default', 'browserSync','watch']
     grunt.registerTask 'assets', ['copy:assets']
-    grunt.registerTask 'default', ['concat:libs','newer:uglify','newer:jade','newer:coffee','newer:sass','newer:less']
+    grunt.registerTask 'default', ['newer:uglify','newer:jade','newer:sass','wiredep']
 

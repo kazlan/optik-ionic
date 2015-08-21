@@ -15,7 +15,6 @@
   "dependencies": {
     "ionic": "~1.1.0",
     "ionicons": "~2.0.1",
-    "ionic-material": "~0.4.2",
     "angularfire": "~1.1.2"
   }
 }
