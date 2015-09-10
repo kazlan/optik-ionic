@@ -1,12 +1,12 @@
 {
-  "name": "plantilla",
-  "version": "1.0.0",
+  "name": "optik Ionic version",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Jorge.mollon@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "grunt": "^0.4.5",

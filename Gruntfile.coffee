@@ -20,10 +20,11 @@ module.exports = (grunt) ->
     #- BrowserSync
         browserSync:
             bsFiles:
-                src: 'app/**/*'
+                src: ['app/**/*.html','app/**/*.js','app/**/*.css']
             options:
                 server:
                     baseDir: "app/"
+                    routes: '/bower_components': 'bower_components'
                 ui:
                     port: 8080
                 open: false
@@ -65,7 +66,7 @@ module.exports = (grunt) ->
                 spawn: false
             jade:
                 files: "app/**/*.jade"
-                tasks: ['jade']
+                tasks: ['jade','wiredep']
             coffee:
                 files: "app/**/*.coffee"
                 tasks: ['coffee']
@@ -77,14 +78,15 @@ module.exports = (grunt) ->
                 tasks: ['less']
             js:
                 files: "app/**/*.js"
-                tasks: ['copy:jscript']           
+                tasks: ['copy:jscript']          
             bower:
                 files: "bower.json"
-                tasks: ['wiredep']
+                tasks: ['wiredep'] 
+            
    #- USEMIN:: Concat, minify y filerevision de js y css en index.html
         copy:
             build:
-                src: 'app/index.html'
+                src: "app/index.html"
                 dest: 'build/index.html'
         filerev:
             options:
