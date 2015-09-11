@@ -75,10 +75,7 @@ module.exports = (grunt) ->
                 tasks: ['sass']
             less:
                 files: "app/css/*.less"
-                tasks: ['less']
-            js:
-                files: "app/**/*.js"
-                tasks: ['copy:jscript']          
+                tasks: ['less']        
             bower:
                 files: "bower.json"
                 tasks: ['wiredep'] 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" ng-app="optikApp">
   <head>
     <title>OptikIonic</title>
     <meta charset="utf8">
@@ -11,8 +11,23 @@
     <!-- endbower-->
     <!--endbuild-->
   </head>
-  <body>
-    <h1>ahoy!!!!!</h1>
+  <body controller="mainController">
+    <ion-side-menus>
+      <ion-side-menu side="left">
+        <ion-header-bar>
+          <h1 class="title">Opciones</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ion-list>
+            <ion-item>opcion1</ion-item>
+            <ion-item>opcion2</ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-side-menu>
+      <ion-side-menu-content drag-content="true" edge-drag-threshold="true">
+        <div ui-view></div>
+      </ion-side-menu-content>
+    </ion-side-menus>
     <!--build:js js/libs.min.js-->
     <!-- bower:js-->
     <script src="../bower_components/angular/angular.js"></script>
@@ -24,6 +39,8 @@
     <script src="../bower_components/firebase/firebase.js"></script>
     <script src="../bower_components/angularfire/dist/angularfire.js"></script>
     <!-- endbower-->
+    <script src="app.js"></script>
+    <script src="router.js"></script>
     <!--endbuild-->
   </body>
 </html>
