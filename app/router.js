@@ -1,7 +1,7 @@
 angular
 	.module('optikApp')
 	.config( function($stateProvider, $urlRouterProvider){
-		$urlRouterProvider.otherwise('/dashboard');
+		$urlRouterProvider.otherwise('/listado');
 		$stateProvider
 			.state('dashboard', {
 				url: '/dashboard',
@@ -10,6 +10,10 @@ angular
 			.state('login',{
 				url: '/login',
 				templateUrl: 'templates/login.html'	
+			})
+			.state('listado',{
+				url: '/listado',
+				templateUrl: 'listado/listado.html'
 			})
 		
 	});

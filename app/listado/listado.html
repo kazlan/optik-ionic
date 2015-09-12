@@ -1,0 +1,15 @@
+
+<ion-header-bar align-title="centre" class="bar-positive">
+  <div class="buttons">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </div>
+  <h1 class="title">Listado de clientes</h1>
+  <div class="buttons">
+    <button class="button">Filtros</button>
+  </div>
+</ion-header-bar>
+<ion-content ng-controller="listadoController">
+  <ion-list>
+    <div ng-repeat="cliente in clientes" class="ion-item">{{cliente.nombre}}</div>
+  </ion-list>
+</ion-content>

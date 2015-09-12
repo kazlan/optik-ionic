@@ -15,12 +15,13 @@
     <ion-side-menus>
       <ion-side-menu side="left">
         <ion-header-bar>
-          <h1 class="title">Opciones</h1>
+          <h1 class="title">Optik v0.0.1</h1>
         </ion-header-bar>
         <ion-content>
           <ion-list>
-            <ion-item>opcion1</ion-item>
-            <ion-item>opcion2</ion-item>
+            <ion-item ui-sref="dashboard" class="item-icon-left"><i class="icon ion-home calm"></i>Página principal</ion-item>
+            <ion-item ui-sref="listado" class="item-icon-left"><i class="icon ion-person calm"></i>Lista de Clientes</ion-item>
+            <ion-item ui-sref="dataUpload" class="item-icon-left"> <i class="icon ion-ios-cloud-upload-outline calm"></i>Importar archivo de datos</ion-item>
           </ion-list>
         </ion-content>
       </ion-side-menu>
@@ -31,16 +32,20 @@
     <!--build:js js/libs.min.js-->
     <!-- bower:js-->
     <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/firebase/firebase.js"></script>
+    <script src="../bower_components/angularfire/dist/angularfire.js"></script>
     <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="../bower_components/ionic/release/js/ionic.js"></script>
     <script src="../bower_components/ionic/release/js/ionic-angular.js"></script>
-    <script src="../bower_components/firebase/firebase.js"></script>
-    <script src="../bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="../bower_components/js-xlsx/dist/xlsx.js"></script>
     <!-- endbower-->
     <script src="app.js"></script>
     <script src="router.js"></script>
+    <script src="services/dataFactory.js"></script>
+    <script src="dashboard/dashboardController.js"></script>
+    <script src="listado/listadoController.js"></script>
     <!--endbuild-->
   </body>
 </html>

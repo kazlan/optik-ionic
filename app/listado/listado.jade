@@ -1,0 +1,10 @@
+ion-header-bar.bar-positive(align-title="centre")
+	.buttons
+		button.button.button-icon.icon.ion-navicon(menu-toggle="left")
+	h1.title Listado de clientes
+	.buttons
+		button.button Filtros
+ion-content(ng-controller="listadoController")
+	ion-list
+		.ion-item(ng-repeat="cliente in clientes")
+			{{cliente.nombre}}
